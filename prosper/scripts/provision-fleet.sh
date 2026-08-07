@@ -2,6 +2,7 @@
 set -euo pipefail
 
 root="${BUZZ_PROSPER_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+cd "$root"
 app_data="/Users/craigstratton/Library/Application Support/xyz.block.buzz.app"
 was_running=0
 reopened=0

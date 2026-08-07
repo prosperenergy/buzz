@@ -2,6 +2,7 @@
 set -euo pipefail
 
 root="${BUZZ_PROSPER_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+cd "$root"
 source "$root/bin/activate-hermit"
 cargo run --quiet -p prosper-buzz-fleet-provisioner -- doctor
 
