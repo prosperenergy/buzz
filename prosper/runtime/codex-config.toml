@@ -1,0 +1,2 @@
+# Isolated Buzz Codex profile. Authentication is symlinked at install time.
+model_reasoning_effort = "medium"

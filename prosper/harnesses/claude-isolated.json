@@ -1,0 +1,9 @@
+{
+  "id": "claude-isolated",
+  "label": "Claude - Prosper isolated subscription",
+  "command": "/Users/craigstratton/Projects/prosper/buzz/prosper/bin/claude-buzz-acp",
+  "args": [],
+  "env": {},
+  "installInstructionsUrl": "https://code.claude.com/docs/",
+  "installHint": "Uses Craig's existing first-party Claude login with project plugins, hooks, MCP servers, and bypass permissions disabled."
+}

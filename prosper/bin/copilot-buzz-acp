@@ -1,0 +1,11 @@
+#!/bin/zsh
+set -eu
+
+unset OPENAI_API_KEY CODEX_API_KEY ANTHROPIC_API_KEY XAI_API_KEY GEMINI_API_KEY GOOGLE_API_KEY
+
+exec /Users/craigstratton/.local/bin/copilot \
+  --disable-builtin-mcps \
+  --no-custom-instructions \
+  --no-remote \
+  --no-remote-export \
+  --acp "$@"

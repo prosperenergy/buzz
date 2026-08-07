@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "relayUrl": "wss://prosper.communities.buzz.xyz",
+  "expectedOwnerNpub": "npub1l38grupz2g8ag0g5hqn7k74v0zphdl950g5qfrxggxp6md98gtmqdqcnyr",
+  "team": {
+    "id": "prosper-team:fleet",
+    "name": "Prosper Fleet",
+    "description": "Craig Stratton's six current Prosper AI operators.",
+    "instructions": "Craig's newest instruction and live proof outrank saved state. Preserve files, protect secrets, keep external actions approval-gated, and distinguish drafts or process state from verified completion."
+  },
+  "agents": [
+    {
+      "slug": "prosper:hanna",
+      "name": "Hanna",
+      "runtime": "gemini-buzz",
+      "command": "prosper/bin/gemini-buzz-acp",
+      "promptFile": "prosper/personas/HANNA.md"
+    },
+    {
+      "slug": "prosper:sam",
+      "name": "Sam",
+      "runtime": "codex-isolated",
+      "command": "prosper/bin/codex-buzz-acp",
+      "promptFile": "prosper/personas/SAM.md"
+    },
+    {
+      "slug": "prosper:burtha",
+      "name": "Burtha",
+      "runtime": "goose-buzz",
+      "command": "prosper/bin/goose-buzz-acp",
+      "promptFile": "prosper/personas/BURTHA.md"
+    },
+    {
+      "slug": "prosper:kayla",
+      "name": "Kayla",
+      "runtime": "gemini-buzz",
+      "command": "prosper/bin/gemini-buzz-acp",
+      "promptFile": "prosper/personas/KAYLA.md"
+    },
+    {
+      "slug": "prosper:maddi",
+      "name": "Maddi",
+      "runtime": "grok-buzz",
+      "command": "prosper/bin/grok-buzz-acp",
+      "promptFile": "prosper/personas/MADDI.md"
+    },
+    {
+      "slug": "prosper:oma",
+      "name": "Oma",
+      "runtime": "grok-buzz",
+      "command": "prosper/bin/grok-buzz-acp",
+      "promptFile": "prosper/personas/OMA.md"
+    }
+  ]
+}

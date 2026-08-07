@@ -1,0 +1,9 @@
+{
+  "id": "grok-buzz",
+  "label": "Grok Build - Prosper isolated",
+  "command": "/Users/craigstratton/Projects/prosper/buzz/prosper/bin/grok-buzz-acp",
+  "args": [],
+  "env": {},
+  "installInstructionsUrl": "https://docs.x.ai/build/overview",
+  "installHint": "Uses Craig's existing grok.com login in an isolated home with memory, subagents, workflows, web fetch, plugins, hooks, and telemetry disabled."
+}

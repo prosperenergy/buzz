@@ -7027,6 +7027,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "prosper-buzz-fleet-provisioner"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "buzz-sdk",
+ "chrono",
+ "hex",
+ "libc",
+ "nostr",
+ "serde",
+ "serde_json",
+ "sha2 0.11.0",
+]
+
+[[package]]
 name = "prost"
 version = "0.13.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"

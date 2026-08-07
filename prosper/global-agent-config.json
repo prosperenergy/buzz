@@ -1,0 +1,9 @@
+{
+  "env_vars": {
+    "PATH": "/Users/craigstratton/.local/bin:/Users/craigstratton/.npm-global/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PROSPER_DESK": "/Users/craigstratton/PROSPER-HANNA-SAM-SHARED"
+  },
+  "provider": null,
+  "model": null,
+  "preferred_runtime": null
+}

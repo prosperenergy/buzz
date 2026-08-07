@@ -1,0 +1,7 @@
+#!/bin/zsh
+set -eu
+
+# Gemini currently has no configured MCP servers or extensions on this account.
+# Keep tool approval at the interactive default and remove ambient API-key routes.
+unset OPENAI_API_KEY CODEX_API_KEY ANTHROPIC_API_KEY XAI_API_KEY GEMINI_API_KEY GOOGLE_API_KEY
+exec /Users/craigstratton/.npm-global/bin/gemini --acp --approval-mode default "$@"

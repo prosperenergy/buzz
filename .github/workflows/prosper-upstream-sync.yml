@@ -1,0 +1,40 @@
+name: Prosper upstream sync
+
+on:
+  schedule:
+    - cron: "17 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prosper-upstream-sync
+  cancel-in-progress: false
+
+jobs:
+  merge-upstream:
+    if: github.repository == 'prosperenergy/buzz'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out the Prosper fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Fetch and merge Block upstream
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "prosperenergy automation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/block/buzz.git
+          git fetch --prune upstream main
+          if git merge-base --is-ancestor upstream/main HEAD; then
+            echo "Prosper fork already contains upstream/main"
+            exit 0
+          fi
+          git merge --no-ff --no-edit --signoff upstream/main
+          git push origin HEAD:main

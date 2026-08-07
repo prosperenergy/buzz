@@ -1,0 +1,5 @@
+#!/bin/zsh
+set -eu
+
+root="${BUZZ_PROSPER_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+exec /Users/craigstratton/.npm-global/bin/node "$root/prosper/bin/grok-acp-autoauth.mjs"

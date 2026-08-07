@@ -1,0 +1,9 @@
+{
+  "id": "copilot-buzz",
+  "label": "GitHub Copilot CLI - Prosper isolated",
+  "command": "/Users/craigstratton/Projects/prosper/buzz/prosper/bin/copilot-buzz-acp",
+  "args": [],
+  "env": {},
+  "installInstructionsUrl": "https://docs.github.com/en/copilot/",
+  "installHint": "Uses Craig's existing GitHub Copilot login with remote agents, custom instructions, and MCP servers disabled."
+}

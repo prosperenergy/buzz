@@ -1,0 +1,9 @@
+{
+  "id": "goose-buzz",
+  "label": "Goose - Prosper isolated ChatGPT fallback",
+  "command": "/Users/craigstratton/Projects/prosper/buzz/prosper/bin/goose-buzz-acp",
+  "args": [],
+  "env": {},
+  "installInstructionsUrl": "https://block.github.io/goose/",
+  "installHint": "Runs Goose through Craig's ChatGPT subscription in isolated Goose and Codex profiles."
+}

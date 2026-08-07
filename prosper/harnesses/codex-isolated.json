@@ -1,0 +1,9 @@
+{
+  "id": "codex-isolated",
+  "label": "Codex - Prosper isolated ChatGPT",
+  "command": "/Users/craigstratton/Projects/prosper/buzz/prosper/bin/codex-buzz-acp",
+  "args": [],
+  "env": {},
+  "installInstructionsUrl": "https://developers.openai.com/codex/",
+  "installHint": "Uses Craig's existing ChatGPT login in an isolated Buzz profile."
+}

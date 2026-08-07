@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>energy.prosper.buzz-fleet-sync</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>/Users/craigstratton/Projects/prosper/buzz/prosper/scripts/sync-local.sh</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StartInterval</key>
+  <integer>1800</integer>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>StandardOutPath</key>
+  <string>/Users/craigstratton/Library/Logs/Prosper/buzz-fleet-sync.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/craigstratton/Library/Logs/Prosper/buzz-fleet-sync.err.log</string>
+</dict>
+</plist>

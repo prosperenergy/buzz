@@ -1,0 +1,15 @@
+#!/bin/zsh
+set -eu
+
+root="${BUZZ_PROSPER_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+runtime="$root/prosper/.runtime"
+
+# Reuse the refreshable first-party login while disabling project settings,
+# plugins, hooks, MCP servers, and permission bypasses in the audited adapter.
+# Do not set CLAUDE_CONFIG_DIR: Claude Code intentionally scopes its native
+# credential service when that override is present, even if it names ~/.claude.
+export BUZZ_CLAUDE_ISOLATED=1
+export CLAUDE_CODE_EXECUTABLE="/Users/craigstratton/.local/bin/claude"
+unset CLAUDE_CODE_OAUTH_TOKEN ANTHROPIC_API_KEY OPENAI_API_KEY CODEX_API_KEY XAI_API_KEY GEMINI_API_KEY GOOGLE_API_KEY
+
+exec "$runtime/npm/node_modules/.bin/claude-agent-acp" "$@"

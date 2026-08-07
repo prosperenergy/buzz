@@ -1,0 +1,14 @@
+#!/bin/zsh
+set -eu
+
+root="${BUZZ_PROSPER_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+runtime="$root/prosper/.runtime"
+
+export CODEX_HOME="$runtime/homes/codex/.codex"
+export CODEX_PATH="$runtime/npm/node_modules/.bin/codex"
+export APP_SERVER_LOGS="$runtime/logs/codex"
+export INITIAL_AGENT_MODE="agent"
+export NO_BROWSER=1
+unset OPENAI_API_KEY CODEX_API_KEY ANTHROPIC_API_KEY XAI_API_KEY GEMINI_API_KEY GOOGLE_API_KEY
+
+exec "$runtime/npm/node_modules/.bin/codex-acp" "$@"

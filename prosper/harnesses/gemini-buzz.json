@@ -1,0 +1,9 @@
+{
+  "id": "gemini-buzz",
+  "label": "Gemini CLI - Prosper subscription",
+  "command": "/Users/craigstratton/Projects/prosper/buzz/prosper/bin/gemini-buzz-acp",
+  "args": [],
+  "env": {},
+  "installInstructionsUrl": "https://geminicli.com/docs/",
+  "installHint": "Uses Craig's existing Google login with no configured MCP servers or extensions and default tool approval."
+}
