@@ -803,6 +803,32 @@ test("first-launch key import continues to machine setup", async ({ page }) => {
   await expect(page.getByTestId("app-loading-gate")).toHaveCount(0);
 });
 
+test("imported-key users can skip out of harness setup", async ({ page }) => {
+  // Regression: importing an existing key sets the onboarding state machine's
+  // "continuing" marker, which pinned the stage to onboarding even after
+  // complete() ran — so Skip/Next silently did nothing. The fresh-key skip
+  // tests never exercised the import path, so this gap shipped. Prove an
+  // imported-key user actually leaves onboarding on Skip.
+  await installMockBridge(page, undefined, {
+    skipCommunitySeed: true,
+    skipOnboardingSeed: true,
+  });
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Use an existing key" }).click();
+  const importedNsec = nsecEncode(hexToBytes(TEST_IDENTITIES.alice.privateKey));
+  await page.getByTestId("nostr-import-nsec-input").fill(importedNsec);
+  await page.getByTestId("nostr-import-submit").click();
+
+  await expect(page.getByTestId("onboarding-page-2")).toBeVisible();
+  await page.getByTestId("onboarding-setup-skip").click();
+
+  // Reaching community onboarding proves machine onboarding completed rather
+  // than staying pinned on the setup step.
+  await expect(page.getByText("Join or create a community")).toBeVisible();
+  await expect(page.getByTestId("onboarding-page-2")).toHaveCount(0);
+});
+
 test("first-launch encrypted backup import asks for a passphrase and continues", async ({
   page,
 }) => {
@@ -2985,27 +3011,6 @@ test("first-run onboarding keeps the shell hidden and lands on private Welcome a
   await expectWelcomeGuideIntro(page);
 });
 
-function retryToast(page: Page, title: string) {
-  return page
-    .locator("[data-sonner-toast][data-removed='false']")
-    .filter({ hasText: title });
-}
-
-async function retryToastAction(
-  page: Page,
-  { command, title }: { command: string; title: string },
-) {
-  const activeToast = retryToast(page, title);
-  await expect(
-    activeToast.getByRole("button", { name: "Retry" }),
-  ).toBeVisible();
-  const before = await commandCount(page, command);
-  await activeToast
-    .getByRole("button", { name: "Retry" })
-    .dispatchEvent("click");
-  await expect.poll(() => commandCount(page, command)).toBeGreaterThan(before);
-}
-
 async function commandCount(page: Page, command: string) {
   return page.evaluate(
     (target) =>
@@ -3015,16 +3020,14 @@ async function commandCount(page: Page, command: string) {
   );
 }
 
-test("failed starter channel retries recreate actionable toasts", async ({
+test("failed public starter channel setup does not show a retry toast", async ({
   page,
 }) => {
   const starterError = "Mock starter channel setup failed.";
   await seedActiveIdentity(page, BLANK_TYLER_IDENTITY);
   await installMockBridge(
     page,
-    {
-      ensureStarterChannelsErrors: [starterError, starterError, starterError],
-    },
+    { ensureStarterChannelsErrors: [starterError, starterError] },
     { skipOnboardingSeed: true },
   );
   await page.goto("/");
@@ -3033,45 +3036,12 @@ test("failed starter channel retries recreate actionable toasts", async ({
   await completeProfileOnboarding(page);
 
   await expectPrivateWelcomeLanding(page);
-  const title = "Couldn't set up starter channels";
-  const activeToast = retryToast(page, title);
-  await expect(activeToast).toContainText(starterError);
-  await retryToastAction(page, {
-    command: "ensure_starter_channels",
-    title,
-  });
-  await expect(activeToast).toContainText(starterError);
   await expect(
-    activeToast.getByRole("button", { name: "Retry" }),
-  ).toBeVisible();
-});
-
-test("successful starter channel retry clears its actionable toast", async ({
-  page,
-}) => {
-  const starterError = "Mock starter channel setup failed.";
-  await seedActiveIdentity(page, BLANK_TYLER_IDENTITY);
-  await installMockBridge(
-    page,
-    {
-      ensureStarterChannelsErrors: [starterError, starterError],
-    },
-    { skipOnboardingSeed: true },
-  );
-  await page.goto("/");
-
-  await page.getByTestId("onboarding-display-name").fill("Morty QA");
-  await completeProfileOnboarding(page);
-
-  const title = "Couldn't set up starter channels";
-  await expect(retryToast(page, title)).toContainText(starterError);
-  await retryToastAction(page, {
-    command: "ensure_starter_channels",
-    title,
-  });
-  await expect(retryToast(page, title)).toHaveCount(0);
-  await expectWelcomeView(page);
-  await expectStarterChannels(page);
+    page
+      .locator("[data-sonner-toast][data-removed='false']")
+      .filter({ hasText: "Couldn't set up starter channels" }),
+  ).toHaveCount(0);
+  expect(await commandCount(page, "ensure_starter_channels")).toBe(2);
 });
 
 test("first-run onboarding posts the live Fizz kickoff", async ({ page }) => {
